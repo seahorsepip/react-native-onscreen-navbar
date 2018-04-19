@@ -1,4 +1,4 @@
-package com.attehuhtakangas.navigationbar;
+package com.seapip.thomas.navigationbar;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.facebook.react.bridge.Promise;
@@ -24,6 +26,8 @@ public class NavigationBarModule extends ReactContextBaseJavaModule {
 
     private static final String ERROR_NO_ACTIVITY = "E_NO_ACTIVITY";
     private static final String ERROR_NO_ACTIVITY_MESSAGE = "Tried to change the navigation bar while not attached to an Activity";
+    private static final String ERROR_API_LEVEL = "API_LEVEl";
+    private static final String ERROR_API_LEVEL_MESSAGE = "Only Android Oreo and above is supported";
 
     private static final String HEIGHT_KEY = "HEIGHT";
 
@@ -82,7 +86,7 @@ public class NavigationBarModule extends ReactContextBaseJavaModule {
                                 .setStartDelay(0);
                         colorAnimation.start();
                     } else {
-                        activity.getWindow().setStatusBarColor(color);
+                        activity.getWindow().setNavigationBarColor(color);
                     }
                     res.resolve(null);
                 }
@@ -113,6 +117,31 @@ public class NavigationBarModule extends ReactContextBaseJavaModule {
                     res.resolve(null);
                 }
             });
+        }
+    }
+
+    @ReactMethod
+    public void setLightButtons(final boolean light, final Promise res) {
+        final Activity activity = getCurrentActivity();
+        if (activity == null) {
+            res.reject(ERROR_NO_ACTIVITY, ERROR_NO_ACTIVITY_MESSAGE);
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Window window = activity.getWindow();
+            View view = window.getDecorView();
+            int flags = view.getSystemUiVisibility();
+            if(light) {
+                window.setFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS, WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+            } else {
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            view.setSystemUiVisibility(flags);
+        } else {
+            res.reject(ERROR_API_LEVEL, ERROR_API_LEVEL_MESSAGE);
         }
     }
 

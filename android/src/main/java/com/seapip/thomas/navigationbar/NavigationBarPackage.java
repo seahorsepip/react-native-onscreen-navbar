@@ -1,4 +1,4 @@
-package com.attehuhtakangas.navigationbar;
+package com.seapip.thomas.navigationbar;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -18,6 +18,11 @@ public class NavigationBarPackage implements ReactPackage {
         modules.add(new NavigationBarModule(reactContext));
 
         return modules;
+    }
+
+    @Override
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return null;
     }
 
     @Override

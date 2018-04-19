@@ -1,9 +1,4 @@
-[![Build Status](https://travis-ci.org/jazmon/react-native-onscreen-navbar.svg?branch=master)](https://travis-ci.org/jazmon/react-native-onscreen-navbar)
-[![GitHub stars](https://img.shields.io/github/stars/jazmon/react-native-onscreen-navbar.svg)](https://github.com/jazmon/react-native-onscreen-navbar/stargazers)
-[![Greenkeeper badge](https://badges.greenkeeper.io/jazmon/react-native-onscreen-navbar.svg)](https://greenkeeper.io/)
-[![npm version](https://badge.fury.io/js/react-native-onscreen-navbar.svg)](https://badge.fury.io/js/react-native-onscreen-navbar)
-
-# react-native-onscreen-navbar
+# react-native-onscreen-navbar-fork
 
 A React Native component to customize the Navigation Bar looks on Android.
 
@@ -17,15 +12,11 @@ A React Native component to customize the Navigation Bar looks on Android.
 
 ### React Native >=0.46.0
 
-`yarn add react-native-onscreen-navbar` or with npm `npm install react-native-onscreen-navbar --save`
-
-#### For react-native pre 0.46.0 use the 1.2 version
-
-`yarn add react-native-onscreen-navbar@1.2.0` or with npm`npm install react-native-onscreen-navbar@1.2.0 --save`
+`yarn add react-native-onscreen-navbar-fork` or with npm `npm install react-native-onscreen-navbar-fork --save`
 
 ### Linking (automatically)
 
-`react-native link react-native-onscreen-navbar`
+`react-native link react-native-onscreen-navbar-fork`
 
 ### Linking (manually)
 
@@ -33,7 +24,7 @@ A React Native component to customize the Navigation Bar looks on Android.
 
 ```diff
 dependencies {
-+   compile project(':react-native-onscreen-navbar')
++   compile project(':react-native-onscreen-navbar-fork')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
